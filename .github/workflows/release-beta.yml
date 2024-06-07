@@ -1,0 +1,25 @@
+name: release to beta
+
+on:
+  push:
+    tags:
+      - 'beta-*'
+
+env:
+  TAG_NAME: ${{ github.ref }}
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    env:
+      TAG_NAME: ${{ github.ref }}
+  test:
+    uses: ./.github/workflows/_test.yml
+  verify:
+    uses: ./.github/workflows/_verify.yml
+  release:
+    needs: [ test, verify ]
+    uses: ./.github/workflows/_publish.yml
+    with:
+      channel: 'beta'
+      version: ${env.TAG_NAME#refs/tags/release-}

@@ -1,0 +1,24 @@
+name: publish plugin
+
+on:
+  workflow_call:
+    inputs:
+      channel:
+        description: 'The channel to publish the plugin to'
+        required: true
+        type: string
+        default: 'beta'
+      version:
+        description: 'The version to publish the plugin as'
+        required: true
+        type: string
+
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo channel
+        run: echo ${{ inputs.channel }}
+      - name: echo ver
+        run: echo ${{ inputs.version }}
