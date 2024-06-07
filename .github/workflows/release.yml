@@ -9,10 +9,6 @@ env:
   TAG_NAME: ${{ github.ref }}
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    env:
-      TAG_NAME: ${{ github.ref }}
   test:
     uses: ./.github/workflows/_test.yml
   verify:
