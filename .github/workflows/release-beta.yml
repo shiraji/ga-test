@@ -14,8 +14,8 @@ jobs:
   verify:
     uses: ./.github/workflows/_verify.yml
   release:
-    needs: [ test, verify ]
+    needs: [ test, verify, set-version ]
     uses: ./.github/workflows/_publish.yml
     with:
       channel: 'beta'
-      version: ${env.TAG_NAME#refs/tags/beta-}
+      version: "${{ env.TAG_NAME#refs/tags/beta- }}"
